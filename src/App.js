@@ -9,8 +9,7 @@ function App() {
         <div className='app_container'>
             <ContainerDimensions>
                 {({width, height}) =>
-                    <MapComponent width={width} height={height}/>
-                }
+                    <MapComponent width={width} height={height}/>}
             </ContainerDimensions>
             <DrawerComponent/>
         </div>

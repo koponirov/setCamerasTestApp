@@ -7,22 +7,20 @@ import { DrawerFormRedux } from "./DrawerForm";
 import {removeMarker, setMarkerData} from "../redux/reducers/mapReducer";
 
 
-const DrawerComponent = ({ visible, toggleVisible, markers, setMarkerData, removeMarker }) => {
+const DrawerComponent = ({ visible, toggleVisible, setMarkerData, removeMarker, currentMarker }) => {
 
     const onClose = () => {
         toggleVisible()
     };
 
     const onSubmit = (formData) => {
-        debugger
-        let id = 1;
-        let range = parseInt(formData.range,10);
-        setMarkerData(id, range)
-    }
 
-    const values = {
-        range: 10,
-    }
+        let id = currentMarker.id;
+        //перестало срабатывать задаваемое значение типа в форме value="number"
+        let range = parseInt(formData.range,10)
+        setMarkerData(id, range);
+        toggleVisible()
+    };
 
     return (
 
@@ -34,9 +32,10 @@ const DrawerComponent = ({ visible, toggleVisible, markers, setMarkerData, remov
             maskStyle={{display: 'none'}}
         >
             <DrawerFormRedux onSubmit={onSubmit}
-                             initialValues={values}
+                             initialValues={currentMarker}
                              removeMarker={removeMarker}
                              toggleVisible={toggleVisible}
+                             id={currentMarker ? currentMarker.id : 0}
             />
         </Drawer>
 
@@ -46,7 +45,8 @@ const DrawerComponent = ({ visible, toggleVisible, markers, setMarkerData, remov
 const mapStateToProps = (state) => {
     return {
         visible: state.drawer.visible,
-        markers: state.map.markers
+        markers: state.map.markers,
+        currentMarker: state.map.currentMarker
     }
 }
 

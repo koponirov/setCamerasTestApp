@@ -1,21 +1,21 @@
 import React from 'react';
-import {ImageOverlay, Map, Marker, Polygon, Circle} from "react-leaflet";
-import {CRS, Icon} from 'leaflet';
-import {connect} from "react-redux";
-import {changeViewport, setMarker} from "../redux/reducers/mapReducer";
+import { ImageOverlay, Map, Polygon, Circle } from "react-leaflet";
+import { CRS, Icon } from 'leaflet';
+import { connect } from "react-redux";
+import {setCurrentMarker, setMarker} from "../redux/reducers/mapReducer";
 import camera from '../assets/camera.svg';
 import arrow from '../assets/up-arrow.svg';
 import '../App.css'
-import {toggleVisible} from "../redux/reducers/drawerReducer";
+import { toggleVisible } from "../redux/reducers/drawerReducer";
 import RotatedMarker from "./RotatedMarker";
 
 
-const MapComponent = ({markers, setMarker, width, height, toggleVisible}) => {
+const MapComponent = ({ markers, setMarker, width, height, toggleVisible, setCurrentMarker }) => {
+
     const addMarker = (e) => {
         let lat = e.latlng.lat;
         let lng = e.latlng.lng;
         setMarker({lat, lng});
-        console.log(markers)
     };
 
     const cameraIcon = new Icon({
@@ -34,44 +34,38 @@ const MapComponent = ({markers, setMarker, width, height, toggleVisible}) => {
             onDblclick={addMarker}
             doubleClickZoom={false}
             dragging={true}
-            onViewportChanged={(viewport) => {
-                console.log(viewport)
-            }}
         >
-
-            <button onClick={toggleVisible} className='btn'><b>&lt;</b></button>
-
             <ImageOverlay
                 url={'https://static.tildacdn.com/tild3965-6139-4564-b262-303737393665/_8.jpg'}
                 bounds={[[-10, 100], [-400, 650]]}
             >
 
-                {markers.map(m => (
+                {markers.map(m => {
+
+                    const lat = m.position[0];
+                    const lng = m.position[1];
+
+                    return (
                     <Circle
-                        center={[m.position.lat, m.position.lng]}
+                        center={[lat, lng]}
                         radius={2}
                         key={m.id}
                         onClick={(e) => {
-                            if (e.latlng.lat == m.position.lat && e.latlng.lng == m.position.lng) {
-                                console.log(m);
+                            if (e.latlng.lat == lat && e.latlng.lng == lng) {
                                 toggleVisible()
+                                setCurrentMarker(m)
                             } else {
                                 console.log('no')
                             }
 
                         }}
-                        icon={cameraIcon}
                     >
                         <Polygon
-                            positions={[[m.position.lat, m.position.lng], [m.position.lat + m.range, m.position.lng - 3], [m.position.lat + m.range, m.position.lng + 3]]}/>
+                            positions={[[lat, lng], [lat + m.range, lng - 3], [lat + m.range, lng + 3]]}/>
                     </Circle>
-
-                ))}
-
+                )})}
 
             </ImageOverlay>
-
-
         </Map>
     );
 };
@@ -82,5 +76,5 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {setMarker, changeViewport, toggleVisible})(MapComponent);
+export default connect(mapStateToProps, {setMarker, setCurrentMarker, toggleVisible})(MapComponent);
 

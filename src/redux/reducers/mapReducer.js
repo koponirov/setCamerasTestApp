@@ -1,11 +1,12 @@
 const ADD_MARKER = 'ADD_MARKER';
 const REMOVE_MARKER = 'REMOVE_MARKER';
 const SET_MARKER_DATA = 'SET_MARKER_DATA';
+const SET_CURRENT_MARKER = 'SET_CURRENT_MARKER';
 
 let initialState = {
     markers: [],
+    currentMarker: null,
     editMode: false,
-    viewport: {center: [-705,1366], zoom: 0}
 };
 
 const mapReducer = (state = initialState, action) => {
@@ -17,16 +18,13 @@ const mapReducer = (state = initialState, action) => {
                 markers: [
                     ...state.markers,
                     {
-                        id: state.markers.length+1,
-                        position:{
-                            lat:action.marker.lat,
-                            lng:action.marker.lng
-                        },
+                        id: state.markers.length + 1,
+                        position: [action.marker.lat, action.marker.lng],
                         angle: 0,
                         range: 25,
                         direction: 'north'
                     }
-                        ]
+                ]
             };
         case SET_MARKER_DATA:
             return {
@@ -37,14 +35,16 @@ const mapReducer = (state = initialState, action) => {
                     }
                     return marker;
                 })
-
-
-
             };
         case REMOVE_MARKER:
             return {
                 ...state,
-                markers: state.markers.filter(marker=> marker.id != action.id)
+                markers: state.markers.filter(marker => marker.id != action.id)
+            };
+        case SET_CURRENT_MARKER:
+            return {
+                ...state,
+                currentMarker: {...action.marker}
             };
 
         default:
@@ -52,9 +52,10 @@ const mapReducer = (state = initialState, action) => {
     }
 };
 
-export const setMarker = (marker) => ({type:ADD_MARKER,marker});
-export const setMarkerData = (id,range) => ({type:SET_MARKER_DATA, id, range});
-export const removeMarker = (id) => ({type:REMOVE_MARKER,id});
-export const changeViewport = (viewport) => ({type:REMOVE_MARKER,viewport})
+export const setMarker = (marker) => ({type: ADD_MARKER, marker});
+export const setMarkerData = (id, range) => ({type: SET_MARKER_DATA, id, range});
+export const setCurrentMarker = (marker) => ({type: SET_CURRENT_MARKER, marker});
+export const removeMarker = (id) => ({type: REMOVE_MARKER, id});
+
 
 export default mapReducer;

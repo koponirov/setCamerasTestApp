@@ -25,12 +25,12 @@ const makeField = Component => ({input, meta, children, hasFeedback, label, ...r
 const AInput = makeField(Input);
 
 const DrawerForm = props => {
-    debugger
-    const {handleSubmit, reset, removeMarker, toggleVisible} = props;
+
+    const {handleSubmit, reset, removeMarker, toggleVisible, id} = props;
 
     const deleteMarker = () => {
         reset();
-        removeMarker(1)
+        removeMarker(id)
         toggleVisible()
     }
 
@@ -39,8 +39,11 @@ const DrawerForm = props => {
 
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Field label="Координаты" name="position" component={AInput} placeholder="широта, долгота"
-                               hasFeedback/>
+                        <Field label="Координаты"
+                               name="position"
+                               component={AInput}
+                               placeholder="широта, долгота"
+                               />
                     </Col>
                 </Row>
 
@@ -52,13 +55,16 @@ const DrawerForm = props => {
                         <Field label="Угол обзора" name="angle" component={AInput} placeholder="Угол"/>
                     </Col>
                     <Col span={8}>
-                        <Field label="Дальность обзора" name="range" type="number" component={AInput} placeholder="Дальность"/>
+                        <Field label="Дальность обзора" name="range" value={'number'} component={AInput} placeholder="Дальность"/>
                     </Col>
                 </Row>
 
 
                 <FormItem>
-                    <Button type="primary" htmlType="submit" style={{marginRight: "10px"}}>
+                    <Button type="primary"
+                            htmlType="submit"
+                            style={{marginRight: "10px"}}
+                    >
                         Сохранить
                     </Button>
 
@@ -72,5 +78,5 @@ const DrawerForm = props => {
 
 export const DrawerFormRedux = reduxForm({
     form: "drawerForm", // a unique identifier for this form
-
+    enableReinitialize: true
 })(DrawerForm);
