@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import mapReducer from "./reducers/mapReducer";
 import drawerReducer from "./reducers/drawerReducer";
 import { reducer as reduxFormReducer } from 'redux-form';
@@ -9,8 +9,9 @@ let reducers = combineReducers({
     form: reduxFormReducer
 });
 
-const store = createStore(reducers);
-
-window.__store__ = store;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(
+    applyMiddleware()
+));
 
 export default store;

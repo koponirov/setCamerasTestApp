@@ -4,9 +4,10 @@ import 'antd/dist/antd.css'
 import { connect } from "react-redux";
 import { toggleVisible } from "../redux/reducers/drawerReducer";
 import { DrawerFormRedux } from "./DrawerForm";
+import {removeMarker, setMarkerData} from "../redux/reducers/mapReducer";
 
 
-const DrawerComponent = ({ visible, toggleVisible, markers }) => {
+const DrawerComponent = ({ visible, toggleVisible, markers, setMarkerData, removeMarker }) => {
 
     const onClose = () => {
         toggleVisible()
@@ -14,19 +15,29 @@ const DrawerComponent = ({ visible, toggleVisible, markers }) => {
 
     const onSubmit = (formData) => {
         debugger
-        console.log(formData)
+        let id = 1;
+        let range = parseInt(formData.range,10);
+        setMarkerData(id, range)
+    }
+
+    const values = {
+        range: 10,
     }
 
     return (
 
         <Drawer
-            width={720}
+            width={540}
             onClose={onClose}
             visible={visible}
             bodyStyle={{paddingBottom: 80}}
             maskStyle={{display: 'none'}}
         >
-            <DrawerFormRedux onSubmit={onSubmit} initialValues={markers[0]}/>
+            <DrawerFormRedux onSubmit={onSubmit}
+                             initialValues={values}
+                             removeMarker={removeMarker}
+                             toggleVisible={toggleVisible}
+            />
         </Drawer>
 
     );
@@ -39,4 +50,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {toggleVisible})(DrawerComponent)
+export default connect(mapStateToProps,
+    {toggleVisible, setMarkerData , removeMarker})(DrawerComponent)

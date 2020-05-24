@@ -3,39 +3,15 @@ import {Form, Input, Button, Col, Row} from "antd";
 import {Field, reduxForm} from "redux-form";
 import {Form as FormRedux} from 'redux-form'
 
-
 const FormItem = Form.Item;
 
-
-const formItemLayout = {
-    labelCol: {
-        xs: {span: 24},
-        sm: {span: 6}
-    },
-    wrapperCol: {
-        xs: {span: 24},
-        sm: {span: 14}
-    }
-};
-
-const tailFormItemLayout = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0
-        },
-        sm: {
-            span: 14,
-            offset: 6
-        }
-    }
-};
-
 const makeField = Component => ({input, meta, children, hasFeedback, label, ...rest}) => {
+
     const hasError = meta.touched && meta.invalid;
+
     return (
         <FormItem
-            {...formItemLayout}
+
             label={label}
             validateStatus={hasError ? "error" : "success"}
             hasFeedback={hasFeedback && hasError}
@@ -49,7 +25,14 @@ const makeField = Component => ({input, meta, children, hasFeedback, label, ...r
 const AInput = makeField(Input);
 
 const DrawerForm = props => {
-    const {handleSubmit, pristine, reset, submitting} = props;
+    debugger
+    const {handleSubmit, reset, removeMarker, toggleVisible} = props;
+
+    const deleteMarker = () => {
+        reset();
+        removeMarker(1)
+        toggleVisible()
+    }
 
     return (
         <FormRedux onSubmit={handleSubmit}>
@@ -69,31 +52,22 @@ const DrawerForm = props => {
                         <Field label="Угол обзора" name="angle" component={AInput} placeholder="Угол"/>
                     </Col>
                     <Col span={8}>
-                        <Field label="Дальность обзора" name="range" component={AInput} placeholder="Дальность"/>
+                        <Field label="Дальность обзора" name="range" type="number" component={AInput} placeholder="Дальность"/>
                     </Col>
                 </Row>
 
 
-                <FormItem {...tailFormItemLayout}>
+                <FormItem>
                     <Button type="primary" htmlType="submit" style={{marginRight: "10px"}}>
                         Сохранить
                     </Button>
 
-                    <Button disabled={pristine || submitting} onClick={reset}>
+                    <Button onClick={deleteMarker}>
                         Удалить
                     </Button>
                 </FormItem>
         </FormRedux>
     );
-};
-
-const validate = values => {
-    const errors = {};
-    if (!values.firstName) {
-        errors.firstName = "Required";
-    }
-
-    return errors;
 };
 
 export const DrawerFormRedux = reduxForm({

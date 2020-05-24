@@ -11,7 +11,6 @@ import RotatedMarker from "./RotatedMarker";
 
 
 const MapComponent = ({markers, setMarker, width, height, toggleVisible}) => {
-
     const addMarker = (e) => {
         let lat = e.latlng.lat;
         let lng = e.latlng.lng;
