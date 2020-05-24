@@ -15,9 +15,11 @@
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
     "react-leaflet-distortable-imageoverlay": "^1.0.0",
+    "react-leaflet-extendable": "^1.0.2",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.5"
   },
   "scripts": {
     "start": "react-scripts start",

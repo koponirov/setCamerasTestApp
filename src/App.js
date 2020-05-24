@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import MapComponent from "./components/Map";
 import ContainerDimensions from "react-container-dimensions";
-import DrawerForm from "./components/Drawer";
+import DrawerComponent from "./components/Drawer";
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
                     <MapComponent width={width} height={height}/>
                 }
             </ContainerDimensions>
-            <DrawerForm/>
+            <DrawerComponent/>
         </div>
     )
 }

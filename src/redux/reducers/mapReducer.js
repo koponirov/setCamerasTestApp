@@ -20,7 +20,10 @@ const mapReducer = (state = initialState, action) => {
                         position:{
                             lat:action.marker.lat,
                             lng:action.marker.lng
-                        }
+                        },
+                        angle: 0,
+                        range: 25,
+                        direction: 'north'
                     }
                         ]
             };
