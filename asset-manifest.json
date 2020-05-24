@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/koponirov/setCamerasTestApp/static/css/main.4f69c0d3.chunk.css",
+    "main.js": "/koponirov/setCamerasTestApp/static/js/main.b9c3bd39.chunk.js",
+    "main.js.map": "/koponirov/setCamerasTestApp/static/js/main.b9c3bd39.chunk.js.map",
+    "runtime-main.js": "/koponirov/setCamerasTestApp/static/js/runtime-main.4c9583cf.js",
+    "runtime-main.js.map": "/koponirov/setCamerasTestApp/static/js/runtime-main.4c9583cf.js.map",
+    "static/css/2.4c6ee7a4.chunk.css": "/koponirov/setCamerasTestApp/static/css/2.4c6ee7a4.chunk.css",
+    "static/js/2.fbc6af6e.chunk.js": "/koponirov/setCamerasTestApp/static/js/2.fbc6af6e.chunk.js",
+    "static/js/2.fbc6af6e.chunk.js.map": "/koponirov/setCamerasTestApp/static/js/2.fbc6af6e.chunk.js.map",
+    "index.html": "/koponirov/setCamerasTestApp/index.html",
+    "precache-manifest.5752b19e77773641a738861a7f0e64dd.js": "/koponirov/setCamerasTestApp/precache-manifest.5752b19e77773641a738861a7f0e64dd.js",
+    "service-worker.js": "/koponirov/setCamerasTestApp/service-worker.js",
+    "static/css/2.4c6ee7a4.chunk.css.map": "/koponirov/setCamerasTestApp/static/css/2.4c6ee7a4.chunk.css.map",
+    "static/css/main.4f69c0d3.chunk.css.map": "/koponirov/setCamerasTestApp/static/css/main.4f69c0d3.chunk.css.map",
+    "static/js/2.fbc6af6e.chunk.js.LICENSE.txt": "/koponirov/setCamerasTestApp/static/js/2.fbc6af6e.chunk.js.LICENSE.txt",
+    "static/media/camera.svg": "/koponirov/setCamerasTestApp/static/media/camera.f16a1286.svg",
+    "static/media/up-arrow.svg": "/koponirov/setCamerasTestApp/static/media/up-arrow.4c7789e9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4c9583cf.js",
+    "static/css/2.4c6ee7a4.chunk.css",
+    "static/js/2.fbc6af6e.chunk.js",
+    "static/css/main.4f69c0d3.chunk.css",
+    "static/js/main.b9c3bd39.chunk.js"
+  ]
+}
